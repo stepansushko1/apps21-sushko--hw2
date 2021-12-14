@@ -51,9 +51,9 @@ public final class ImmutableArrayList implements ImmutableList {
         System.arraycopy(arr, 0, newArr, 0, index);
         System.arraycopy(c, 0, newArr, index, index + c.length - index);
 
-        if (elementsAmount + c.length - (index + c.length) >= 0){
-            System.arraycopy(arr, index + c.length - c.length, newArr, index +
-                    c.length, elementsAmount + c.length - (index + c.length));
+        if (elementsAmount + c.length - (index + c.length) >= 0) {
+            System.arraycopy(arr, index + c.length - c.length, newArr, index
+                    + c.length, elementsAmount + c.length - (index + c.length));
         }
 
         ImmutableArrayList res = new ImmutableArrayList(newArr);
@@ -70,7 +70,6 @@ public final class ImmutableArrayList implements ImmutableList {
         return arr[index];
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @Override
 public ImmutableList remove(int index) throws IndexOutOfBoundsException {
     if ((index > elementsAmount) || (index < 0)) {
