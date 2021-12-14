@@ -1,11 +1,10 @@
 package ua.edu.ucu.collections.immutable;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public final class ImmutableArrayList implements ImmutableList {
-    public Object[] arr;
-    public int elementsAmount = 0;
+    private Object[] arr;
+    private int elementsAmount = 0;
 
     public ImmutableArrayList(Object[] elements) {
         arr = new Object[elements.length];
@@ -31,7 +30,8 @@ public final class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList add(int index, Object e) throws IndexOutOfBoundsException {
+    public ImmutableList add(int index, Object e)
+            throws IndexOutOfBoundsException {
         return addAll(index, new Object[] {e});
     }
 
@@ -41,20 +41,20 @@ public final class ImmutableArrayList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList addAll(int index, Object[] c) throws IndexOutOfBoundsException {
+    public ImmutableList addAll(int index, Object[] c)
+            throws IndexOutOfBoundsException {
         if ((index > elementsAmount + 1) || (index < 0)) {
             throw new IndexOutOfBoundsException();
         }
 
         Object[] newArr = new Object[size() + c.length];
         System.arraycopy(arr, 0, newArr, 0, index);
+        System.arraycopy(c, 0, newArr, index, index + c.length - index);
 
-        for (int i = index; i < index + c.length; i++) {
-            newArr[i] = c[i - index];
+        if (elementsAmount + c.length - (index + c.length) >= 0){
+            System.arraycopy(arr, index + c.length - c.length, newArr, index +
+                    c.length, elementsAmount + c.length - (index + c.length));
         }
-
-        if (elementsAmount + c.length - (index + c.length) >= 0)
-            System.arraycopy(arr, index + c.length - c.length, newArr, index + c.length, elementsAmount + c.length - (index + c.length));
 
         ImmutableArrayList res = new ImmutableArrayList(newArr);
         res.elementsAmount = elementsAmount + c.length;
@@ -80,8 +80,10 @@ public ImmutableList remove(int index) throws IndexOutOfBoundsException {
     Object[] newArr = new Object[elementsAmount];
     System.arraycopy(arr, 0, newArr, 0, index);
 
-    if (elementsAmount - (index + 1) >= 0)
-        System.arraycopy(arr, index + 1, newArr, index + 1 - 1, elementsAmount - (index + 1));
+    if (elementsAmount - (index + 1) >= 0) {
+        System.arraycopy(arr, index + 1, newArr, index + 1 - 1,
+                elementsAmount - (index + 1));
+    }
 
     ImmutableArrayList res = new ImmutableArrayList(newArr);
     res.elementsAmount = elementsAmount - 1;

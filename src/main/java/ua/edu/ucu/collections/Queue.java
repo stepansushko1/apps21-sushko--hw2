@@ -9,16 +9,10 @@ public class Queue {
 
 
     public Object peek() throws EmptyStackException {
-        if (list.isEmpty()) {
-            throw new EmptyStackException();
-        }
         return list.getFirst();
     }
 
     public Object dequeue() throws EmptyStackException {
-        if (list.isEmpty()) {
-            throw new EmptyStackException();
-        }
         Object elm = list.getFirst();
         list = list.removeFirst();
         return elm;

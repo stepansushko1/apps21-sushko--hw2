@@ -54,7 +54,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public ImmutableList addAll(int index, Object[] c) {
-        if ((index < 0 )|| (index > size())) {
+        if ((index < 0) || (index > size())) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -84,7 +84,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        if ((index < 0 ) || (index >= size())) {
+        if ((index < 0) || (index >= size())) {
             throw new IndexOutOfBoundsException();
         }
         Node curr = this.head;
@@ -97,7 +97,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public ImmutableList remove(int index) {
-        if ((index < 0 )|| (index >= size())) {
+        if ((index < 0) || (index >= size())) {
             throw new IndexOutOfBoundsException();
         }
 
